@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Quiz</title>
+    <script src="assets/js/main.js" defer></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+    <nav id="navBar">
+        <div class="row">
+            <div class="col-6" id="scores">
+                <a class="NavA" href="#">
+                    <h2>Highest results</h2>
+                </a>
+            </div>
+
+            <div class="col-6" id="timerTag">
+                <h2> Time left: <span class="time"></span></h2>
+            </div>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <header>
+
+            <h1>Coding Quiz Challenge</h1>
+        </header>
+        <main>
+            <div class="card">
+                <div class="card-header">
+                    <!-- <h2> </h2> -->
+                </div>
+                <div class="card-body">
+                    <textarea readonly id="quizID" placeholder="" aria-label="QuestionAnswer"></textarea>
+                </div>
+                <div class="card-footer">
+                    <button id="generate" class="btn">Start</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
