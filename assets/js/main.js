@@ -3,6 +3,10 @@
 var secondsLeft = 75;
 var pos = 0;
 var call_next = false;
+var arrQuestions = ["Commonly used data types DO NOT include:", "Is the sky blue?"];
+var arrAnswers = [["strings", "booleans", "numbers"], ["False", "Don't know"]];
+var arrCorrect = ["alerts", "yes, true"];
+var quesNum = 0;
 
 class Question {
     constructor(a, q, c) {
@@ -39,6 +43,7 @@ class Question {
             tagH.setAttribute("onClick", "answerClk(" + i + ")")
             document.querySelector("#quizID").appendChild(tagH);
         }
+
         return true
     }
 }
@@ -62,7 +67,9 @@ function answerClk(n) {
         tagNew[i].style.opacity = 0.6;
         tagNew[i].onclick = '';
     }
-    call_next = true;
+    var qSelect = new Question(arrAnswers[quesNum], arrQuestions[quesNum], arrCorrect[quesNum])
+    quesNum += 1;
+    var c = setTimeout(qSelect.questionOut(), 3000);
 }
 // Write quiz to the #quizID input
 // function writeQuiz() {
@@ -104,10 +111,6 @@ function generateQuiz() {
     //     qSelect.questionOut();
     // }
     setTime();
-    var arrQuestions = ["Commonly used data types DO NOT include:", "Is the sky blue?"];
-    var arrAnswers = [["strings", "booleans", "numbers"], ["False", "Don't know"]];
-    var arrCorrect = ["alerts", "yes, true"];
-    var c;
     // var arr=[
     //     {
     //        answers: {
@@ -128,16 +131,15 @@ function generateQuiz() {
     //     }
     // ];
 
-    for (var i = 0; i < 2; i++) {
-        var qSelect = new Question(arrAnswers[i], arrQuestions[i], arrCorrect[i])
-        // var qSelect=arr[i];
-        console.log(qSelect);
-        qSelect.questionOut();
-        // while (!call_next) {
-        //     c = 0;
-        // }
-        // call_next = false;
-    }
+
+    var qSelect = new Question(arrAnswers[quesNum], arrQuestions[quesNum], arrCorrect[quesNum])
+    quesNum += 1;
+    qSelect.questionOut();
+    // while (!call_next) {
+    //     c = 0;
+    // }
+    // call_next = false;
+
 }
 
 var generateBtn = document.querySelector("#generate");
