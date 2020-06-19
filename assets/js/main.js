@@ -1,12 +1,24 @@
 // Assignment Code
 
 var secondsLeft = 75;
+var ResultTime = 0;
 var pos = 0;
 var call_next = false;
-var arrQuestions = ["Commonly used data types DO NOT include:", "Is the sky blue?"];
-var arrAnswers = [["strings", "booleans", "numbers"], ["False", "Don't know"]];
-var arrCorrect = ["alerts", "yes, true"];
+var arrQuestions = ["Commonly used data types DO NOT include:",
+    "The conditions in an if/else statement is enclosed with _____.",
+    "Arrays in JavaScript can be used to store______.",
+    "String values must be enclosed within _____when being assigned to variables ",
+    "A very usefull tool used during development and debugging for printing content to thedebugger is:",
+    "Is the sky blue?"];
+var arrAnswers = [["strings", "booleans", "numbers"],
+["quotes", "curly brackets", "square brakets"],
+["numbers and strings", "other arrays", "boolean"],
+["commas", "curly brackets", "parentheses"],
+["Javascript", "terminal/bash", "for loops"],
+["False", "Don't know ask Bob"]];
+var arrCorrect = ["alerts", "parentheses", "All above", "quotes", "console.log", "yes, true"];
 var quesNum = 0;
+
 
 class Question {
     constructor(a, q, c) {
@@ -23,13 +35,11 @@ class Question {
         // get random position for the correct answer
         pos = Math.floor(Math.random() * (this.answers.length + 1));
         var order = 0;
-        var tagH = document.getElementsByTagName("h2")[0];
-        tagH.parentNode.removeChild(tagH);
+        var tagH;
+        ClearCard();
         tagH = document.createElement("h2");
         tagH.innerHTML = this.question;
         document.querySelector(".card-header").appendChild(tagH);
-        var tagH = document.querySelector("#quizID");
-        tagH.innerHTML = "";
         for (var i = 0; i < this.answers.length + 1; i++) {
             tagH = document.createElement("button");
             if (i === pos) {
@@ -46,6 +56,9 @@ class Question {
 
         return true
     }
+}
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 function answerClk(n) {
     var tagNew = document.createElement("figure");
@@ -68,8 +81,41 @@ function answerClk(n) {
         tagNew[i].onclick = '';
     }
     var qSelect = new Question(arrAnswers[quesNum], arrQuestions[quesNum], arrCorrect[quesNum])
-    quesNum += 1;
-    var c = setTimeout(qSelect.questionOut(), 3000);
+    if (quesNum < arrCorrect.length) {
+        quesNum += 1;
+        sleep(1000).then(() => { qSelect.questionOut(); }); // wait a 1 second before goes to next question
+    }
+    else {
+        ResultTime = secondsLeft;
+        ResultsForm(secondsLeft);
+    }
+
+}
+function ResultsForm(sec) {
+    ClearCard();
+    var tagH = document.createElement("h2");
+    tagH.innerHTML = "All done!";
+    document.querySelector(".card-header").appendChild(tagH);
+    tagH = document.createElement("h4");
+    tagH.innerHTML = "Your final score:" + sec;
+    document.querySelector("#quizID").appendChild(tagH);
+    tagH = document.createElement("label");
+    tagH.innerHTML = "Enter initials:";
+    document.querySelector("#quizID").appendChild(tagH);
+    tagH = document.createElement("input");
+    document.querySelector("#quizID").appendChild(tagH);
+    tagH = document.createElement("button");
+    tagH.innerHTML = "Submit";
+    document.querySelector("#quizID").appendChild(tagH);
+{/* <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="John"></input> */}
+}
+
+function ClearCard() {
+    var tagH = document.getElementsByTagName("h2")[0];
+    tagH.parentNode.removeChild(tagH);
+    var tagH = document.querySelector("#quizID");
+    tagH.innerHTML = "";
 }
 // Write quiz to the #quizID input
 // function writeQuiz() {
@@ -92,7 +138,7 @@ function generateQuiz() {
             secondsLeft--;
             timeEl.textContent = secondsLeft;
 
-            if (secondsLeft === 0) {
+            if ((secondsLeft === 0) && (ResultTime === 0)) {
                 clearInterval(timerInterval);
                 sendMessage();
             }
