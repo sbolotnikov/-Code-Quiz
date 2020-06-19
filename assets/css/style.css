@@ -70,7 +70,32 @@ header {
 .card-body {
   min-height: 100px;
 }
+#QuizId{
+  display: block;
+  float: left;
+}
+.btnAnswer {
+  width: 100%;
+  background-color: darkmagenta;
+  color: white;
+  text-decoration-style: double;
+  text-align: left;
+  margin-top: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 
+.NoteBelow {
+  width: 100%;
+  color: lightgray;
+  text-decoration-style: dotted;
+  border-top:2px solid lightgrey;
+  margin: 0;
+  margin-top: 10px;
+}
+.center-align {
+  text-align: center;
+}
 .card-footer {
   text-align: center;
 }
@@ -91,7 +116,7 @@ header {
 
 .btn {
   border: none;
-  background-color: hsl(360, 91%, 36%);
+  background-color: rgb(105, 37, 114);
   border-radius: 25px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
     0px;
