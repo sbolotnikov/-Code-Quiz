@@ -3,7 +3,7 @@
 var secondsLeft = 75;
 var ResultTime = 0;
 var pos = 0;
-var call_next = false;
+var initials;
 var arrQuestions = ["Commonly used data types DO NOT include:",
     "The conditions in an if/else statement is enclosed with _____.",
     "Arrays in JavaScript can be used to store______.",
@@ -16,7 +16,7 @@ var arrAnswers = [["strings", "booleans", "numbers"],
 ["commas", "curly brackets", "parentheses"],
 ["Javascript", "terminal/bash", "for loops"],
 ["False", "Don't know ask Bob"]];
-var arrCorrect = ["alerts", "parentheses", "All above", "quotes", "console.log", "yes, true"];
+var arrCorrect = ["alerts", "parentheses", "Everything listed", "quotes", "console.log", "yes, true"];
 var quesNum = 0;
 
 
@@ -72,7 +72,7 @@ function answerClk(n) {
         secondsLeft -= 10;
 
     }
-    document.querySelector("#quizID").appendChild(tagNew);
+    document.querySelector(".card-footer").appendChild(tagNew);
 
     tagNew = document.querySelectorAll(".btnAnswer");
     console.log(tagNew)
@@ -103,12 +103,33 @@ function ResultsForm(sec) {
     tagH.innerHTML = "Enter initials:";
     document.querySelector("#quizID").appendChild(tagH);
     tagH = document.createElement("input");
+    tagH.setAttribute("class", "inputstyle");
+    tagH.setAttribute("name", "initials");
     document.querySelector("#quizID").appendChild(tagH);
     tagH = document.createElement("button");
+    tagH.setAttribute("class", "btn");
+    tagH.setAttribute("onclick", "highResults()");
     tagH.innerHTML = "Submit";
-    document.querySelector("#quizID").appendChild(tagH);
-{/* <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname" value="John"></input> */}
+    document.querySelector(".card-footer").appendChild(tagH);
+    var tagH = document.querySelector(".time");
+    tagH.innerHTML = "";
+}
+function highResults(){
+    var ini=document.getElementsByName("initials").innerHTML;
+    // alert(ini);
+
+    // var openFile=fopen(getFilePath(),0);
+
+// readString = fread(openFile,flength(file) ;
+// editFile = fopen("c:\MyNewFile.txt", 3);
+// opens the file for writing
+// fwrite(file, str);
+// str is the content that is to be written into the file.
+
+// editFile = fopen("c:\MyNewFile.txt", 3);
+// opens the file for writing
+// fwrite(file, str);
+// str is the content that is to be written into the file.
 }
 
 function ClearCard() {
@@ -116,23 +137,13 @@ function ClearCard() {
     tagH.parentNode.removeChild(tagH);
     var tagH = document.querySelector("#quizID");
     tagH.innerHTML = "";
+    var tagH = document.querySelector(".card-footer");
+    tagH.innerHTML = "";
 }
-// Write quiz to the #quizID input
-// function writeQuiz() {
-//     // GIVen a new Quiz starts
-//     var quiz = generateQuiz();
-//     var quizText = document.querySelector("#quizID");
-
-//     quizText.value = quiz;
-//     
-// }
 
 // generateQuiz function should be below
 function generateQuiz() {
     var timeEl = document.querySelector(".time");
-
-
-
     function setTime() {
         var timerInterval = setInterval(function () {
             secondsLeft--;
@@ -142,53 +153,23 @@ function generateQuiz() {
                 clearInterval(timerInterval);
                 sendMessage();
             }
-
+            if ((ResultTime!==0)||(secondsLeft<0)) {
+                clearInterval(timerInterval);
+            }
         }, 1000);
     }
-
     function sendMessage() {
         timeEl.textContent = " ";
-        alert('time runout!');
+        alert('Time runs out! Try again!');
     }
-    // function Quiz() {
-    //     // var qSelect[0] = new Question(["False", "Don't know"], "Is the sky blue?", "yes, true");
-    //     var qSelect = new Question(["strings", "booleans", "numbers"], "Commonly used data types DO NOT include:", "alerts");
-
-    //     qSelect.questionOut();
-    // }
     setTime();
-    // var arr=[
-    //     {
-    //        answers: {
-    //            a: "strings",
-    //            b: "booleans", 
-    //            c:"numbers"  
-    //         },
-    //         question: "Commonly used data types DO NOT include:",
-    //        correct: "alerts"
-    //     },
-    //     {
-    //        answers: {
-    //             a:"False", 
-    //             b:"Don't know"  
-    //         },
-    //         question:"Is the sky blue?",
-    //         correct:"yes, true"
-    //     }
-    // ];
-
-
     var qSelect = new Question(arrAnswers[quesNum], arrQuestions[quesNum], arrCorrect[quesNum])
     quesNum += 1;
     qSelect.questionOut();
-    // while (!call_next) {
-    //     c = 0;
-    // }
-    // call_next = false;
-
 }
 
 var generateBtn = document.querySelector("#generate");
 // Add event listener to generate button
 // WHEN I click the button to generate a quiz
+// generateBtn.addEventListener("click", ResultsForm(55));
 generateBtn.addEventListener("click", generateQuiz);

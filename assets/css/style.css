@@ -35,9 +35,9 @@ body {
 }
 
 .wrapper {
-  padding-top: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 header {
@@ -56,7 +56,7 @@ header {
   font-size: 18px;
   margin: 0 auto;
   max-width: 800px;
-  padding: 30px 40px;
+  padding: 5px 10px;
 }
 
 .card-header::after {
@@ -69,14 +69,19 @@ header {
 
 .card-body {
   min-height: 100px;
+  margin:0;
 }
 #QuizId{
-  display: block;
+  display:flex;
+  flex-wrap: wrap;
   float: left;
+  margin-left: -30px;
+  padding: 0;
 }
 .btnAnswer {
   width: 100%;
   background-color: darkmagenta;
+  border-radius: 25px;
   color: white;
   text-decoration-style: double;
   text-align: left;
@@ -89,7 +94,8 @@ header {
   width: 100%;
   color: lightgray;
   text-decoration-style: dotted;
-  border-top:2px solid lightgrey;
+  font-style: oblique;
+  text-align: left;
   margin: 0;
   margin-top: 10px;
 }
@@ -139,25 +145,16 @@ button[disabled] {
   float: right;
 }
 
-#password {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: none;
-  display: block;
-  width: 100%;
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 85px;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 2px dashed #c0c7cf;
-  border-radius: 6px;
-  resize: none;
-  overflow: hidden;
+.inputstyle {
+
+  border-radius: 5px;
+  border-width: 1px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
+  color: hsl(206, 17%, 28%);
+  font-size: 1.5rem;
+  margin-right: 10px ;
+  padding: 10px 10px;
+
 }
 
 @media (max-width: 690px) {
@@ -167,7 +164,7 @@ button[disabled] {
     padding: 10px 15px;
   }
 
-  #password {
+  .inputstyle {
     font-size: 1rem;
   }
 }
@@ -175,5 +172,8 @@ button[disabled] {
 @media (max-width: 500px) {
   .btn {
     font-size: 0.8rem;
+  }
+  .inputstyle{
+    flex-wrap: wrap;
   }
 }
