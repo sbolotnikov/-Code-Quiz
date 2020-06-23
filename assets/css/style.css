@@ -5,8 +5,7 @@
 }
 
 html,
-body,
-.wrapper {
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -47,7 +46,7 @@ header {
   color: hsl(206, 17%, 28%);
 }
 
-.card {
+.container {
   background-color: hsl(0, 0%, 100%);
   border-radius: 5px;
   border-width: 1px;
@@ -59,7 +58,7 @@ header {
   padding: 5px 10px;
 }
 
-.card-header::after {
+.topPart::after {
   content: " ";
   display: block;
   width: 100%;
@@ -67,10 +66,6 @@ header {
   height: 2px;
 }
 
-.card-body {
-  min-height: 100px;
-  margin:0;
-}
 #QuizId{
   display:flex;
   flex-wrap: wrap;
@@ -103,11 +98,11 @@ header {
 .center-align {
   text-align: center;
 }
-.card-footer {
+.bottomPart {
   text-align: center;
 }
 
-.card-footer::before {
+.bottomPart::before {
   content: " ";
   display: block;
   width: 100%;
@@ -115,7 +110,7 @@ header {
   height: 2px;
 }
 
-.card-footer::after {
+.bottomPart::after {
   content: " hello";
   color: white;
   display: block;

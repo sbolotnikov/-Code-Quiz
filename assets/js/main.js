@@ -66,7 +66,7 @@ class Question {
         ClearCard();
         tagH = document.createElement("h2");
         tagH.innerHTML = this.question;
-        document.querySelector(".card-header").appendChild(tagH);
+        document.querySelector(".topPart").appendChild(tagH);
         for (var i = 0; i < this.answers.length + 1; i++) {
             tagH = document.createElement("button");
             if (i === pos) {
@@ -100,7 +100,7 @@ function answerClk(n) {
         // if wrong then 10 seconds less
         secondsLeft -= 10;
     }
-    document.querySelector(".card-footer").appendChild(tagNew);
+    document.querySelector(".bottomPart").appendChild(tagNew);
     tagNew = document.getElementsByClassName("btnAnswer");
     str = tagNew[n].innerHTML;
     nn = str.indexOf(".") + 2;
@@ -131,7 +131,7 @@ function ResultsForm(sec) {
     ClearCard();
     var tagH = document.createElement("h2");
     tagH.innerHTML = "All done!";
-    document.querySelector(".card-header").appendChild(tagH);
+    document.querySelector(".topPart").appendChild(tagH);
     tagH = document.createElement("h4");
     tagH.innerHTML = "Your final score:" + sec;
     document.querySelector("#quizID").appendChild(tagH);
@@ -207,7 +207,7 @@ function renderResults() {
     var tagG = document.createElement("h2");
     tagG.textContent = "Sorted list of the test results";
     tagG.setAttribute("class", "center-align");
-    document.querySelector(".card-header").appendChild(tagG);
+    document.querySelector(".topPart").appendChild(tagG);
 
 
     // restore default variables
@@ -222,7 +222,7 @@ function renderResults() {
     tagG.textContent = "Start test";
     tagG.setAttribute("class", "btn");
     tagG.addEventListener("click", generateQuiz);
-    document.querySelector(".card-footer").appendChild(tagG);
+    document.querySelector(".bottomPart").appendChild(tagG);
 
     list1 = document.createElement("ul")
     list1.id = "list1";
@@ -248,32 +248,25 @@ function renderResults() {
         tag1 = document.createElement("div");
         tag1.setAttribute("class", "row");
         li.appendChild(tag1);
+
         tag2 = document.createElement("div");
         tag2.setAttribute("class", "col-9");
         tag1.appendChild(tag2);
-
-        var nameA = document.createElement("p");
+        var nameA = document.createElement("h5");
         nameA.textContent = name;
         nameA.setAttribute("data-toggle", "modal");
         nameA.setAttribute("data-target", "#myModal");
-
-
         nameA.style.flexWrap = "wrap";
-
-
-
         tag2.appendChild(nameA);
+
         tag2 = document.createElement("div");
         tag2.setAttribute("class", "col-1");
         tag1.appendChild(tag2);
-        nameA = document.createElement("figure");
-
-
+        nameA = document.createElement("p");
         nameA.style.flexWrap = "wrap";
-
-
         nameA.textContent = time;
         tag2.appendChild(nameA);
+
         tag2 = document.createElement("div");
         tag2.setAttribute("class", "col-2");
         tag1.appendChild(tag2);
@@ -298,9 +291,10 @@ function renderResults() {
 
             // Store updated todos in localStorage, re-render the list
             storeResults();
+            ClearCard();
             renderResults();
         }
-        if (element.matches("p") === true) {
+        if (element.matches("h5") === true) {
             // Get its data-index value and remove the todo element from the list
             var index = element.parentElement.parentElement.parentElement.getAttribute("data-index");
             resultsModalShow(index);
@@ -357,8 +351,8 @@ function ClearCard() {
     var tagH = document.getElementsByTagName("h2")[0];
     tagH.parentNode.removeChild(tagH);
     var tagH = document.querySelector("#quizID");
-    tagH.innerHTML = "";
-    var tagH = document.querySelector(".card-footer");
+    tagH.innerHTML="";
+    var tagH = document.querySelector(".bottomPart");
     tagH.innerHTML = "";
 }
 
