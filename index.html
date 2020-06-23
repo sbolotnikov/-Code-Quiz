@@ -6,20 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Quiz</title>
     <script src="assets/js/main.js" defer></script>
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />;
 </head>
 
 <body>
     <nav id="navBar">
-        <div class="row">
-            <div class="col-6" id="scores">
-                <a class="NavA" href="#">
-                    <h3>View Highscores</h3>
-                </a>
-            </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-6" id="scores">
+                    <a class="NavA" onclick="init()">
+                        <h3>View Highscores</h3>
+                    </a>
+                </div>
 
-            <div class="col-6" id="timerTag">
-                <h3> Time : <span class="time"></span></h3>
+                <div class="col-6" id="timerTag">
+                    <h3> Time : <span class="time"></span></h3>
+                </div>
             </div>
         </div>
     </nav>
@@ -32,11 +37,12 @@
         <main>
             <div class="card">
                 <div class="card-header">
-                    <h2 class ="center-align">Coding Quiz Challenge</h2>
+                    <h2 class="center-align">Coding Quiz Challenge</h2>
                 </div>
                 <div class="card-body">
                     <figure id="quizID">
-                        <p class="center-align">Try to answer the following code-related questionswithin the time limit. Keep in mind that incorrect answers will penalize your scoretimeby TEN seconds!
+                        <p class="center-align">Try to answer the following code-related questionswithin the time limit.
+                            Keep in mind that incorrect answers will penalize your scoretimeby TEN seconds!
                         </p>
                     </figure>
 
@@ -45,8 +51,28 @@
                     <button id="generate" class="btn">Start</button>
                 </div>
             </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h2 class="modal-title"></h2>
+                        </div>
+                        <div class="modal-body">
+                            <figure id="testresults"></figure>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </main>
-    </div>
 </body>
 
 </html>

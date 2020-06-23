@@ -77,6 +77,7 @@ header {
   float: left;
   margin-left: -30px;
   padding: 0;
+  overflow: hidden;
 }
 .btnAnswer {
   width: 100%;
@@ -115,7 +116,8 @@ header {
 }
 
 .card-footer::after {
-  content: " ";
+  content: " hello";
+  color: white;
   display: block;
   clear: both;
 }
@@ -136,9 +138,11 @@ header {
   cursor: pointer;
 }
 
-button[disabled] {
-  cursor: default;
-  background: #c0c7cf;
+.smButton {
+  font-size: 10px;
+  background: #5b0ab8;
+  color: white;
+  margin: 0;
 }
 
 .float-right {
