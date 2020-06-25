@@ -32,7 +32,7 @@ The following animation demonstrates the application functionality requested:
 and final:
 ![code quiz](assets/results.gif)
 here is results screenshots of the solution:
-![code quiz](.assets/1-start-panel.png) 
+![code quiz](assets/1-start-panel.png) 
 start panel
 ![code quiz](assets/2-example-of-the-question.png) 
 example of the question panel. Notice that correct answer is changing position
