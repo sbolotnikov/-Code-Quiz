@@ -1,4 +1,4 @@
-// Assignment Code
+// Assignment of global variables and questions for the test
 
 var secondsLeft = 75;
 var ResultTime = 0;
@@ -47,6 +47,8 @@ var quizQuestions = [
 ];
 var quizUserReply = [];
 var quesNum = 0;
+
+// definig a class that will get question from dataset display it and randomly place correct answer anong other options
 class Question {
     constructor(a, q, c) {
         this.answers = a;
@@ -63,6 +65,7 @@ class Question {
         pos = Math.floor(Math.random() * (this.answers.length + 1));
         var order = 0;
         var tagH;
+        // clear the screen from previous input
         ClearCard();
         tagH = document.createElement("h2");
         tagH.innerHTML = this.question;
@@ -76,8 +79,9 @@ class Question {
                 tagH.innerHTML = (i + 1) + ". " + this.answers[order];
                 order++;
             }
+            // setting up on Click handlers for the user's responding to question
             tagH.setAttribute("class", "btnAnswer");
-            tagH.setAttribute("onClick", "answerClk(" + i + ")")
+            tagH.setAttribute("onClick", "answerClk(" + i + ")");
             document.querySelector("#quizID").appendChild(tagH);
         }
 
@@ -87,6 +91,8 @@ class Question {
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+// this function handles response from users. It displays correct or wrong. delay a second.
+// and move on to the next question. After the last question it sending to ResultsForm
 function answerClk(n) {
     var str = "";
     var nn = 0;
@@ -105,11 +111,7 @@ function answerClk(n) {
     str = tagNew[n].innerHTML;
     nn = str.indexOf(".") + 2;
     str = str.slice(nn);
-    console.log(str);
-    // quizQuestions[quesNum-1].user=str;
     quizUserReply.push(str);
-    // alert(quizAnswers[q);
-
     tagNew = document.querySelectorAll(".btnAnswer");
     for (var i = 0; i < tagNew.length; i++) {
         tagNew[i].style.opacity = 0.6;
@@ -123,8 +125,10 @@ function answerClk(n) {
     else {
         ResultTime = secondsLeft;
         ResultsForm(secondsLeft);
-    }
+    }  
 }
+ // ResultsForm getting the initials of the user and place new results into the array of all test results from local storage,
+//  sorted by time left in the end of the last test question response.
 function ResultsForm(sec) {
     var form1;
     var input1;
@@ -155,7 +159,7 @@ function ResultsForm(sec) {
         event.preventDefault();
 
         var text1 = input1.value.slice(0, 4);
-        // Return from function early if submitted todoText is blank
+        // Return from function early if submitted text is blank
         if (text1 === "") {
             alert("Enter initials!")
             return;
@@ -172,7 +176,6 @@ function ResultsForm(sec) {
         if (storedResults !== null) {
             results = storedResults;
         }
-
         // Add new localResults to results array
         localRes.name = text1;
         localRes.time = ResultTime;
@@ -193,7 +196,7 @@ function ResultsForm(sec) {
         }
         ClearCard();
         tagH = document.createElement("h2");
-        tagH.innerHTML = "Results!";
+        tagH.innerHTML = "Highscores";
         // Store updated results in localStorage, re-render the list
         storeResults();
         renderResults();
@@ -201,22 +204,19 @@ function ResultsForm(sec) {
 }
 
 function renderResults() {
-    // Clear list1 element 
-    // list1.innerHTML = "";
+    // displays results in the list form and user can erase results or look into the details of each test 
+    // by clicking the initials and see in the modal whole test report
     var list1;
     var tagG = document.createElement("h2");
-    tagG.textContent = "Sorted list of the test results";
+    tagG.textContent = "Highscores";
     tagG.setAttribute("class", "center-align");
     document.querySelector(".topPart").appendChild(tagG);
-
-
     // restore default variables
     secondsLeft = 75;
     ResultTime = 0;
     pos = 0;
     quizUserReply = [];
     quesNum = 0;
-
 
     tagG = document.createElement("button");
     tagG.textContent = "Start test";
@@ -230,9 +230,6 @@ function renderResults() {
     document.querySelector("#quizID").appendChild(list1);
     var tag1;
     var tag2;
-
-
-
     // Render a new li for each results
     resLength = results.length;
     for (var i = 0; i < results.length; i++) {
@@ -243,8 +240,6 @@ function renderResults() {
         // li.textContent = name;
         li.setAttribute("data-index", i);
         list1.appendChild(li);
-
-
         tag1 = document.createElement("div");
         tag1.setAttribute("class", "row");
         li.appendChild(tag1);
@@ -274,47 +269,35 @@ function renderResults() {
         button.setAttribute("class", "smButton");
         button.textContent = "Erase";
         tag2.appendChild(button);
-
-
-
-
     }
     // When a element inside of the List1 is clicked...
     list1.addEventListener("click", function (event) {
         var element = event.target;
-
+        var index = element.parentElement.parentElement.parentElement.getAttribute("data-index");
         // If that element is a button...
         if (element.matches("button") === true) {
-            // Get its data-index value and remove the todo element from the list
-            var index = element.parentElement.parentElement.parentElement.getAttribute("data-index");
+            // Get its data-index value and remove the todo element from the list        
             results.splice(index, 1);
-
-            // Store updated todos in localStorage, re-render the list
+            // Store updated results in localStorage, re-render the list
             storeResults();
             ClearCard();
             renderResults();
         }
         if (element.matches("h5") === true) {
             // Get its data-index value and remove the todo element from the list
-            var index = element.parentElement.parentElement.parentElement.getAttribute("data-index");
             resultsModalShow(index);
             console.log(results[index]);
-            // alert(results[index].quiz);
-
-            // Store updated todos in localStorage, re-render the list
-            // storeResults();
-            // renderResults();
         }
     });
 }
+// this function is used for handling the "Highresults" click from the menu
 function init() {
-    // Get stored todos from localStorage
+    // Get stored results from localStorage
     // Parsing the JSON string to an object
     var storedResults = JSON.parse(localStorage.getItem("results"));
-
     clearInterval(timerInterval);
     ClearCard();
-    // If todos were retrieved from localStorage, update the todos array to it
+    // If results were retrieved from localStorage, update the todos array to it
     if (storedResults !== null) {
         results = storedResults;
     }
@@ -322,13 +305,14 @@ function init() {
 }
 
 function storeResults() {
-    // Stringify and set "todos" key in localStorage to todos array
+    // Stringify and send results in localStorage 
     localStorage.setItem("results", JSON.stringify(results));
 }
+// make results of the test into a visible format Question/correct answer /user answer
 function resultsModalShow(x) {
     var tagNew;
     document.querySelector("#testresults").innerHTML = '';
-    document.querySelector(".modal-title").innerHTML = "Test results for: " + results[x].name;
+    document.querySelector(".modal-title").innerHTML = "Test results for: " + results[x].name + ". Time left :" + results[x].time + " seconds";
     for (var i = 0; i < quizQuestions.length; i++) {
         tagNew = document.createElement("H3");
         tagNew.textContent = (i + 1) + ". Question  " + quizQuestions[i].question;
@@ -345,25 +329,22 @@ function resultsModalShow(x) {
     }
 }
 
-
-
 function ClearCard() {
     var tagH = document.getElementsByTagName("h2")[0];
     tagH.parentNode.removeChild(tagH);
     var tagH = document.querySelector("#quizID");
-    tagH.innerHTML="";
+    tagH.innerHTML = "";
     var tagH = document.querySelector(".bottomPart");
     tagH.innerHTML = "";
 }
 
-// generateQuiz function should be below
+// generateQuiz function should be below and starts timer
 function generateQuiz() {
     var timeEl = document.querySelector(".time");
     function setTime() {
         timerInterval = setInterval(function () {
             secondsLeft--;
             timeEl.textContent = secondsLeft;
-
             if ((secondsLeft === 0) && (ResultTime === 0)) {
                 clearInterval(timerInterval);
                 sendMessage();
@@ -373,9 +354,11 @@ function generateQuiz() {
             }
         }, 1000);
     }
+// if you cant finish in time it sending you to results page without submitting results
     function sendMessage() {
         timeEl.textContent = " ";
         alert('Time runs out! Try again!');
+        init();
     }
     setTime();
     var qSelect = new Question(quizQuestions[quesNum].answers, quizQuestions[quesNum].question, quizQuestions[quesNum].right);
