@@ -46,6 +46,10 @@ panel of the stored results
 detailized look on results of the test 
 
 
+<<<<<<< HEAD
+=======
+![code quiz](./assets/04-web-apis-homework-demo.gif)
+>>>>>>> 8ffeac5b00bfcb66b1057c95b5fa6c948a20fab1
 
 ### Review
 
