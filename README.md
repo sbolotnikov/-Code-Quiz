@@ -28,21 +28,21 @@ THEN I can save my initials and score
 
 The following animation demonstrates the application functionality requested:
 
-![code quiz](.assets/04-web-apis-homework-demo.gif)
+![code quiz](assets/04-web-apis-homework-demo.gif)
 and final:
-![code quiz](.assets/results.gif)
+![code quiz](assets/results.gif)
 here is results screenshots of the solution:
 ![code quiz](.assets/1-start-panel.png) 
 start panel
-![code quiz](.assets/2-example-of-the-question.png) 
+![code quiz](assets/2-example-of-the-question.png) 
 example of the question panel. Notice that correct answer is changing position
-![code quiz](.assets/3-example-of-the-response-to-user-input.png)
+![code quiz](assets/3-example-of-the-response-to-user-input.png)
 response to user input
-![code quiz](.assets/4-enter-results-form.png) 
+![code quiz](assets/4-enter-results-form.png) 
 panel after completing the test
-![code quiz](.assets/5-display-of-the-stored-results.png) 
+![code quiz](assets/5-display-of-the-stored-results.png) 
 panel of the stored results
-![code quiz](.assets/6-detailed-look-of-the-individual-results.png)
+![code quiz](assets/6-detailed-look-of-the-individual-results.png)
 detailized look on results of the test 
 
 
