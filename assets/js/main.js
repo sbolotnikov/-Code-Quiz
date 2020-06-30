@@ -276,7 +276,7 @@ function renderResults() {
         var index = element.parentElement.parentElement.parentElement.getAttribute("data-index");
         // If that element is a button...
         if (element.matches("button") === true) {
-            // Get its data-index value and remove the todo element from the list        
+            // Get its data-index value and remove the element from the list        
             results.splice(index, 1);
             // Store updated results in localStorage, re-render the list
             storeResults();
@@ -284,9 +284,8 @@ function renderResults() {
             renderResults();
         }
         if (element.matches("h5") === true) {
-            // Get its data-index value and remove the todo element from the list
+            // Get the modal that arrange detailed answers view of the test for the chosen test results
             resultsModalShow(index);
-            console.log(results[index]);
         }
     });
 }
